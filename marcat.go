@@ -26,11 +26,20 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte(fmt.Sprintf("Hello, %s\n", name)))
 }
 
+func HealthHandler(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusOK)
+	w.Header().Set("Content-Type", "application/json")
+
+	log.Printf("Health checked")
+	w.Write([]byte("Halo Welt"))
+}
+
 func main() {
 	// Create Server and Route Handlers
 
 	r := mux.NewRouter()
 	r.HandleFunc("/", handler)
+	r.HandleFunc("/health", HealthHandler)
 
 	srv := &http.Server{
 		Addr:         ":8080",
@@ -60,6 +69,8 @@ func main() {
 		if err := srv.ListenAndServe(); err != nil {
 			log.Fatal(err)
 		}
+
+		log.Println("Server started")
 	}()
 
 	// Graceful shutdown
