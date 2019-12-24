@@ -2,5 +2,5 @@
 .idea/
 
 # Binary
-out/
+cmd/
 
