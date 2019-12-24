@@ -23,7 +23,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	log.Printf("Received request for %s\n", name)
-	w.Write([]byte (fmt.Sprintf("Hello, %s\n", name)))
+	w.Write([]byte(fmt.Sprintf("Hello, %s\n", name)))
 }
 
 func main() {
@@ -74,7 +74,7 @@ func waitForShutdown(srv *http.Server) {
 	<-interrupChan
 
 	// Create a deadline to wait for
-	ctx, cancel := context.WithTimeout(context.Background(), 10 * time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 	srv.Shutdown(ctx)
 
