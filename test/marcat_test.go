@@ -1,4 +1,4 @@
-package marcat
+package main
 
 import (
 	"net/http"
@@ -16,7 +16,8 @@ func TestHealthCheckHandler(t *testing.T) {
 	}
 
 	rr := httptest.NewRecorder()
-	handler := http.HandlerFunc(marcat.HealthHandler())
+	handler := http.HandlerFunc(marcat.HealthHandler(rr, req))
+
 
 
 

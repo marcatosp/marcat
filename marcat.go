@@ -1,4 +1,4 @@
-package marcat
+package main
 
 import (
 	"context"
