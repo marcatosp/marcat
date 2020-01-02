@@ -14,3 +14,12 @@ jobs:
         uses: actions/checkout@v1
       - name: Build
         run: make build
+  publish:
+    name: Publish Docker
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Push to Github Packages
+        env:
+          GH_USER: ${{ secrets.GH_USER }}
+          GH_MARCAT_PACKAGE_TOKEN: ${{ secrets.GH_MARCAT_PACKAGE_TOKEN }}
+        run: make docker_gh_push
