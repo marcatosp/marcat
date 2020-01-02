@@ -1,5 +1,9 @@
 name: Go
-on: [push]
+on:
+  pull_request:
+    branches:
+      - master
+    types: [created]
 jobs:
   build:
     name: Build
@@ -16,6 +20,7 @@ jobs:
         run: make build
   publish:
     name: Publish Docker
+    needs: build
     runs-on: ubuntu-18.04
     steps:
       - name: Set up Go 1.13.5
