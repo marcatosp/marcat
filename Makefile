@@ -14,4 +14,4 @@ docker_gh_push:
 	docker push docker.pkg.github.com/marcatosp/marcat/marcat:latest
 
 run:
-	docker run -d -p 8080:8080 marcat
+	docker run -d -p 1000:8080 marcat

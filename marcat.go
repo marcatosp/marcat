@@ -11,6 +11,7 @@ import (
 	"time"
 
 	"github.com/gorilla/mux"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"gopkg.in/natefinch/lumberjack.v2"
 )
 
@@ -40,6 +41,7 @@ func main() {
 	r := mux.NewRouter()
 	r.HandleFunc("/", handler)
 	r.HandleFunc("/health", HealthHandler)
+	r.Handle("/metrics", promhttp.Handler())
 
 	srv := &http.Server{
 		Addr:         ":8080",
@@ -72,6 +74,8 @@ func main() {
 
 		log.Println("Server started")
 	}()
+
+	http.ListenAndServe(":2112", nil)
 
 	// Graceful shutdown
 	waitForShutdown(srv)
